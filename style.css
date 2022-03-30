@@ -1,0 +1,58 @@
+/* style.css */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  background-color: blanchedalmond;
+
+  /* This centers our sketch horizontally. */
+  justify-content: center;
+
+  /* This centers our sketch vertically. */
+  /* align-items: center; */
+}
+
+.inner {
+  position: absolute;
+}
+
+.main {
+  position: relative;
+  height: 100%;
+  width: 800px;
+  overflow-y: hidden;
+
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.banner {
+  position: absolute;
+  width: 100%;
+  overflow-y: auto;
+  background-color: #000;
+  color: #fff;
+
+  font-size: 80;
+  text-align: center;
+
+  white-space: pre-wrap;
+}
+
+#bottomBanner {
+  bottom: 100;
+  white-space: pre-wrap;
+
+}
+
+#topBanner {
+  top: 25
+}
+
+#noHire {
+  color: red;
+  display: inline-block;
+}

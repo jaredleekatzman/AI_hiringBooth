@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
+-->
+
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="assets/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
+  <script src="assets/js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="assets/js/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="assets/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="assets/js/face-api.min.js"></script>
+  <script src="assets/js/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="assets/js/selfie_segmentation.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {
+      height: 1500px
+    }
+
+    #progressBarRow {
+      padding-bottom: 10px;
+    }
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    .progress-label {
+        float: left;
+        margin-right: 1em;
+    }
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+
+    .container-fluid {
+      padding-top: 20px;
+      padding-left: 40px;
+      padding-right: 20px;
+    }
+
+    #carouselExampleCaptions {
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row header">
+    <h1>AI Hiring Booth</h1>
+  </div>
+  <div class="row content">
+    <div class="col-lg-6" id="introContent">
+      <p id="description">
+        <em>Have you ever had to record a video for a job interview?</em>
+        <br> <br>
+        More and more companies are automating the job interview process.
+        Some companies will ask you to submit a video and respond to common interview questions.
+        They can then use artificial intelligent (AI) algorithms to 'grade' your response.
+        <br> <br>
+        <em>But how can these AI interviewers work?</em>
+        <br> <br>
+        How can an AI accurately evaluate the diversity of possible candidates?
+        Some companies try to identify patterns in your speech, such as word speed or matching words from a job description.
+        Others will analyze your facial expressions to determine your personality.
+        <br><br>
+        Whether this should or not be done is an on going debate.
+        Would you want to apply for a job where a computer decides if you are hired or not?
+        How do we ensure that an AI interviewers does not discriminate?
+
+        <h3>Do you think you could be hired by an AI?</h3>
+        Select a job description, answer a question, and see for yourself!
+      </p>
+
+      <div class="accordion" id="jobDescriptions">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-value="rideshare" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                Rideshare Driver
+              </button>
+            </h2>
+          </div>
+
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#jobDescriptions">
+            <div class="card-body">
+                We are seeking experienced drivers who can oversee the safety
+                of our riders and ensure their transportation to and from their
+                desired locations. A great candidate is someone who has a
+                passion for transportation, understands all road and safety
+                signs, comprehends their local streets, and has an ability to
+                deliver a world-class customer experience.
+              </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-value="dogwalker" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Dog Walker
+              </button>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#jobDescriptions">
+            <div class="card-body">
+              In the dog walker role, you will walk dogs from client homes as
+              scheduled. A key element of this role is to have physical stamina
+              and the ability to control multiple dogs during walks with
+              intermittent hazards such as vehicle and pedestrian traffic.
+              Success in this role will be determined by client satisfaction
+              and the health and well-being of the client’s pets.
+              </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-value="proofreader" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Essay Proofreader
+              </button>
+            </h2>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#jobDescriptions">
+            <div class="card-body">
+              We are looking for a detail-oriented Proofreader to join our team.
+              You must be proficient in basic and advanced grammar rules and
+              understand how they are used within our style guides. Our ideal
+              candidate is meticulous in reviewing copy, noting errors such as
+              punctuation, spelling, and word usage, and knows how to check
+              statements for accuracy or potential plagiarism. You must
+              communicate effectively with the writers and other staff to
+              ensure documents meet all company guidelines.
+
+
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <p><button class="capture-button btn btn-primary btn-lg" id="startInterview">Start Interview</button>
+        <span id="startInterviewError" style="display: none;">Please select on of the job descriptions before starting!</span>
+      </p>
+    </div>
+    <div class="col-lg-6" id="questionContent" style="display: none;">
+      <h2>Question 1 of 1 for <span id="jobNameTitle">Rideshare Driver</span></h2>
+
+      <p id="questionDescription">
+        <span id="jobDescription"></span>
+
+        <br> <br>
+        Please answer the following question:
+        <br>
+        <h3>Why are you a good fit for this job?</h3>
+        <br>
+        You have 1 minutes to answer this question. Starting now.
+      </p>
+
+
+    </div>
+    <div class="col-lg-6" id="resultsContent" style="display: none;">
+      <h2 id='resultHeader'> Interview Result: <span id="resultBadge" class="badge bg-secondary"></span></h2>
+      Typical AI hiring algorithms will look at a combination of verbal features,
+      based on the text of your interview response, and visual features,
+      which are analyzed using computer vision techniques. Below, we show you
+      some examples of how the AI software would be analyzing your video response.
+      <br><br>
+      As you look through them as yourself:
+      <br><br>
+      <em>
+        How could a software engineer program this? <br>
+        Does the feature feel like a fair representation of a good candidate?<br>
+        Are there any examples of good candidates that will not fit this definition? <br>
+      </em>
+      <br>
+      <div class="accordion" id="interviewResults">
+        <div class="card">
+          <div class="card-header" id="resultHeadingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#resultOne" aria-expanded="true" aria-controls="resultOne">
+                Verbal Features
+              </button>
+            </h2>
+          </div>
+
+          <div id="resultOne" class="collapse show" aria-labelledby="resultHeadingOne">
+            <div class="card-body" id="verbalFeatures">
+                <h4>Speech Fluency</h4>
+                <p>We evaluate how normative are your speech patterns.
+                  Are you speaking too slow or too fast?
+                </p>
+                <ul class="list-group list-group-horizontal" id="fluencyScore">
+                  <!-- Add list-group-item-primary to highlight -->
+                  <li class="list-group-item flex-fill">Novice</li>
+                  <li class="list-group-item flex-fill">Developing</li>
+                  <li class="list-group-item flex-fill">Intermediate</li>
+                  <li class="list-group-item flex-fill">Advanced</li>
+                  <li class="list-group-item flex-fill ">Expert</li>
+                </ul>
+                <br>
+                <h4>Job Fit</h4>
+                <p>We evaluate whether you are the right fit for the job
+                  description based on the keywords you use in your response.
+                </p>
+                <ul class="list-group list-group-horizontal" id="jobFitScore">
+                  <li class="list-group-item flex-fill">Novice</li>
+                  <li class="list-group-item flex-fill">Developing</li>
+                  <li class="list-group-item flex-fill">Intermediate</li>
+                  <li class="list-group-item flex-fill">Advanced</li>
+                  <li class="list-group-item flex-fill ">Expert</li>
+                </ul>
+              </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="resultHeadingTwo">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-value="dogwalker" data-target="#resultTwo" aria-expanded="true" aria-controls="resultTwo">
+                Visual Features
+              </button>
+            </h2>
+          </div>
+          <div id="resultTwo" class="collapse show" aria-labelledby="resultHeadingTwo">
+            <div class="card-body" id="visualFeatures">
+              <h4>Personality Fit</h4>
+              <p>We evaluate your personality using facial expressions and
+                compare it to the preferred personality of the job description.
+              </p>
+              <ul class="list-group list-group-horizontal" id="personalityFitScore">
+                <li class="list-group-item flex-fill">Novice</li>
+                <li class="list-group-item flex-fill">Developing</li>
+                <li class="list-group-item flex-fill">Intermediate</li>
+                <li class="list-group-item flex-fill">Advanced</li>
+                <li class="list-group-item flex-fill">Expert</li>
+              </ul>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-6">
+      <div id="video_recording_panel">
+        <div class="row">
+          <div class="col-sm-4 text-left">
+            <h4>Video Response</h4>
+          </div>
+          <div class="col-sm-4 text-right">
+            <span class="oi oi-ban"></span>
+            No Retries
+          </div>
+          <div class="col-sm-4 text-right">
+            <span class="oi oi-clock" title="clock" aria-hidden="true"></span> minutes: <span id="numMinutes">1</span>
+          </div>
+        </div>
+        <div class="row justify-content-center align-items-center" id="progressBarRow">
+          <div class="col-sm-4 text-center">
+            <div class="d-flex justify-content-between align-middle">
+              <div>Response Time</div>
+              <div id="progressLabel">1:00</div>
+            </div>
+          </div>
+        <div class="col-sm-4 text-center">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
+            id="progressBar"
+            style="width: 0%"
+            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <div class="col-sm-2 text-center">
+          <button class="capture-button btn btn-primary btn-sm" id="doneInterview">Done Answering</button>
+        </div>
+
+        </div>
+        <div class="row justify-content-center">
+          <video autoplay id="video_element" width="640px" height="480px"></video>
+        </div>
+        <div class="row">
+          <label for="finalTranscriptLabel">
+            <span class="oi oi-microphone"></span> Microphone output
+          </label>
+          <textarea class="form-control" id="final_transcript" rows="3" readonly></textarea>
+
+          <!-- <span class="oi oi-microphone"></span> Microphone output
+          <div id="final_transcript"></div>
+          <div id="interim_transcript"></div> -->
+        </div>
+      </div>
+      <div id="video_review_panel" style="display: none;">
+        <div class="row">
+
+          <div class="col-sm-12 text-left">
+            <h2>Review Video Submission</h2>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <canvas id="video_output" width="640px" height="480px"></canvas>
+        </div>
+        <div class="row">
+          <br>
+          <h4>How would the AI grade you differently based on different inputs?</h4>
+          <p>
+            Try editing your transcript and select different video effects to see
+            how an AI hiring algorithm could change your hiring decision.
+            <br>
+          </p>
+        </div>
+        <div class="row">
+          <label for="editTranscriptLabel">
+            <span class="oi oi-microphone"></span> Microphone output - edit the text!
+          </label>
+          <textarea class="form-control" id="edit_transcript" rows="3"></textarea>
+        </div>
+        <div class="row" style="padding-top: 20px">
+          <div class="col-sm-6">
+            <div class="card">
+              <img src="assets/jpg/bookshelf_test.jpg" id="zoomBg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Add Video Background</h5>
+                <p class="card-text">Sometimes AI pick up on background features that should not be important</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card">
+              <img src="assets/png/brightness_contrast.png" id="brightContrast" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Change brightness and contrast</h5>
+                <p class="card-text">Can the AI measure your facial expression in different lighting?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <br>
+          <button class="capture-button btn btn-primary btn-lg" id="reanalyzeInterview">Reanalyze Interview</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// This is to get the video up and running using HTML - need to figure
+// if this works with face-api.js
+
+// https://www.html5rocks.com/en/tutorials/getusermedia/intro/
+const constraints = {
+  video: true,
+};
+
+// const video = document.querySelector("video");
+//
+// navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+//   video.srcObject = stream;
+// });
+
+const captureVideoButton = document.querySelector(
+  ".capture-button"
+);
+const cssFiltersButton = document.querySelector("#cssfilters-apply");
+const video = document.querySelector("video");
+
+let filterIndex = 0;
+const filters = [
+  "grayscale",
+  "sepia",
+  "blur",
+  "brightness",
+  "contrast",
+  "hue-rotate",
+  "hue-rotate2",
+  "hue-rotate3",
+  "saturate",
+  "invert",
+  "",
+];
+
+navigator.mediaDevices
+  .getUserMedia(constraints)
+  .then(handleSuccess)
+  .catch(handleError);
+
+// captureVideoButton.onclick = function () {
+//
+// };
+
+// cssFiltersButton.onclick = video.onclick = function () {
+//   video.className = filters[filterIndex++ % filters.length];
+// };
+
+function handleSuccess(stream) {
+  video.srcObject = stream;
+}
+
+function handleError(error) {
+  console.error("Error: ", error);
+}
+
+
+</script>
+
+<script src="sketch.js" type="application/javascript"></script>
+
+<footer class="container-fluid">
+  <p>Footer Text</p>
+</footer>
+
+</body>
+</html>
