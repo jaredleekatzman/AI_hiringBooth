@@ -1,8 +1,11 @@
+// Other todos:
+
 // Start by Binding Javascript function to
 $("#startInterview").click(startInterview);
 
 // let INTERVIEW_LENGTH_S = 0.10 * 60; // s
 let INTERVIEW_LENGTH_S = 60; // s
+let finishedInterviewLength = INTERVIEW_LENGTH_S;
 
 // How fast the video recording updates - 1 second at a time
 let INTERVIEW_UPDATE_S = 0.5; // s
@@ -56,7 +59,7 @@ function getSelectedJob() {
 }
 
 function startInterview() {
-  // TODO check which job description is selected
+  // TODO: send to the top of the page
 
   // var jobName = "rideshare";
   var jobName = getSelectedJob();
@@ -89,6 +92,8 @@ function startInterview() {
 
   $("#doneInterview").click(() => {
     console.log("clicked!");
+    finishedInterviewLength = INTERVIEW_LENGTH_S - timeLeft;
+
     timeLeft = 0;
     updateProgressBar(timeLeft, INTERVIEW_LENGTH_S);
   });
@@ -159,6 +164,14 @@ function showResults(results) {
   // Edit HTML of features
   updateFeatureResultsHTML(results);
 
+  // $('#edit_transcript').bind('input propertychange', function() {
+  //
+  //     var currentWPM = $("#edit_transcript").val().split(' ').length / (finishedInterviewLength / 60);
+  //     $("#wpm").text(currentWPM);
+  //
+  //     console.log("WPM", currentWPM);
+  // });
+
   // Set up Reanalyze
   $("#reanalyzeInterview").click(reanalyzeResults);
 
@@ -190,6 +203,9 @@ function updateFeatureResultsHTML(results) {
 
   });
 
+  var currentWPM = results.transcript.split(' ').length / (finishedInterviewLength / 60);
+  $("#wpm").text(currentWPM);
+  console.log("WPM", currentWPM);
 }
 
 var startReanalyze = false;
@@ -413,7 +429,8 @@ function analyzeInterview(jobName, features) {
     jobName: jobName,
     verbal: [],
     visual: [],
-    hire: false
+    hire: false,
+    transcript: features.transcript
   };
 
   let speakingFluency = analyzeSpeakingFluency(features);
@@ -443,7 +460,7 @@ function analyzeSpeakingFluency(interviewFeatures) {
   };
 
   let finalTranscript_words = interviewFeatures.transcript.split(' ');
-  let wordsPerMin = finalTranscript_words.length / (INTERVIEW_LENGTH_S / 60);
+  let wordsPerMin = finalTranscript_words.length / (finishedInterviewLength / 60);
 
   // Compute score normal distribution Z-score
   // mean = 140 words per minutes

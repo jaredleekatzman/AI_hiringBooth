@@ -84,7 +84,7 @@
         <br> <br>
         More and more companies are automating the job interview process.
         Some companies will ask you to submit a video and respond to common interview questions.
-        They can then use artificial intelligent (AI) algorithms to 'grade' your response.
+        They can then use artificial intelligence (AI) algorithms to 'grade' your response.
         <br> <br>
         <em>But how can these AI interviewers work?</em>
         <br> <br>
@@ -94,10 +94,14 @@
         <br><br>
         Whether this should or not be done is an on going debate.
         Would you want to apply for a job where a computer decides if you are hired or not?
-        How do we ensure that an AI interviewers does not discriminate?
+        How do make sure that AI interviewers do not discriminate?
 
         <h3>Do you think you could be hired by an AI?</h3>
         Select a job description, answer a question, and see for yourself!
+        <br><br>
+        <p><button class="capture-button btn btn-primary btn-lg" id="startInterview">Start Interview</button>
+          <span id="startInterviewError" style="display: none;">Please select on of the job descriptions before starting!</span>
+        </p>
       </p>
 
       <div class="accordion" id="jobDescriptions">
@@ -112,7 +116,7 @@
 
           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#jobDescriptions">
             <div class="card-body">
-                We are seeking experienced drivers who can oversee the safety
+                <strong>Job Description:</strong> We are seeking experienced drivers who can oversee the safety
                 of our riders and ensure their transportation to and from their
                 desired locations. A great candidate is someone who has a
                 passion for transportation, understands all road and safety
@@ -131,7 +135,7 @@
           </div>
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#jobDescriptions">
             <div class="card-body">
-              In the dog walker role, you will walk dogs from client homes as
+              <strong>Job Description:</strong> In the dog walker role, you will walk dogs from client homes as
               scheduled. A key element of this role is to have physical stamina
               and the ability to control multiple dogs during walks with
               intermittent hazards such as vehicle and pedestrian traffic.
@@ -150,7 +154,7 @@
           </div>
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#jobDescriptions">
             <div class="card-body">
-              We are looking for a detail-oriented Proofreader to join our team.
+              <strong>Job Description:</strong> We are looking for a detail-oriented Proofreader to join our team.
               You must be proficient in basic and advanced grammar rules and
               understand how they are used within our style guides. Our ideal
               candidate is meticulous in reviewing copy, noting errors such as
@@ -165,10 +169,7 @@
         </div>
       </div>
 
-      <br>
-      <p><button class="capture-button btn btn-primary btn-lg" id="startInterview">Start Interview</button>
-        <span id="startInterviewError" style="display: none;">Please select on of the job descriptions before starting!</span>
-      </p>
+
     </div>
     <div class="col-lg-6" id="questionContent" style="display: none;">
       <h2>Question 1 of 1 for <span id="jobNameTitle">Rideshare Driver</span></h2>
@@ -214,7 +215,7 @@
           <div id="resultOne" class="collapse show" aria-labelledby="resultHeadingOne">
             <div class="card-body" id="verbalFeatures">
                 <h4>Speech Fluency</h4>
-                <p>We evaluate how normative are your speech patterns.
+                <p>We evaluate how normal your speech patterns are.
                   Are you speaking too slow or too fast?
                 </p>
                 <ul class="list-group list-group-horizontal" id="fluencyScore">
@@ -336,11 +337,15 @@
             Try editing your transcript and select different video effects to see
             how an AI hiring algorithm could change your hiring decision.
             <br>
+            <br>
+            <button class="capture-button btn btn-primary btn-lg" id="reanalyzeInterview">Reanalyze Interview</button>
+            <button class="capture-button btn btn-primary btn-lg" id="restart" onclick="javascript:window.location.reload(true)">Resubmit Video</button>
+
           </p>
         </div>
         <div class="row">
           <label for="editTranscriptLabel">
-            <span class="oi oi-microphone"></span> Microphone output - edit the text!
+            <span class="oi oi-microphone"></span> Microphone output - Speech Frequency: <span id="wpm"></span> words per minute
           </label>
           <textarea class="form-control" id="edit_transcript" rows="3"></textarea>
         </div>
@@ -363,10 +368,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <br>
-          <button class="capture-button btn btn-primary btn-lg" id="reanalyzeInterview">Reanalyze Interview</button>
         </div>
       </div>
     </div>
@@ -436,7 +437,7 @@ function handleError(error) {
 <script src="sketch.js" type="application/javascript"></script>
 
 <footer class="container-fluid">
-  <p>Footer Text</p>
+  <p>&copy; Jared Katzman</p>
 </footer>
 
 </body>
