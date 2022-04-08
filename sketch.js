@@ -164,14 +164,6 @@ function showResults(results) {
   // Edit HTML of features
   updateFeatureResultsHTML(results);
 
-  // $('#edit_transcript').bind('input propertychange', function() {
-  //
-  //     var currentWPM = $("#edit_transcript").val().split(' ').length / (finishedInterviewLength / 60);
-  //     $("#wpm").text(currentWPM);
-  //
-  //     console.log("WPM", currentWPM);
-  // });
-
   // Set up Reanalyze
   $("#reanalyzeInterview").click(reanalyzeResults);
 
@@ -204,6 +196,7 @@ function updateFeatureResultsHTML(results) {
   });
 
   var currentWPM = results.transcript.split(' ').length / (finishedInterviewLength / 60);
+  currentWPM = Math.round(currentWPM);
   $("#wpm").text(currentWPM);
   console.log("WPM", currentWPM);
 }
@@ -469,7 +462,8 @@ function analyzeSpeakingFluency(interviewFeatures) {
         std = 20;
   var z_score = (wordsPerMin - mean) / std;  // will be likely betwee -3 and 3
   var finalScore = 4 - (Math.abs(z_score) * 2); // reduce score for every 1/2 standard deviation
-  var finalScore = Math.max(finalScore, 0);
+  finalScore = Math.max(finalScore, 0);
+  finalScore = Math.round(finalScore);
   // where 5 = mean average words per minutes
   rc.value = finalScore;
 
